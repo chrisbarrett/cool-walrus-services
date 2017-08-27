@@ -7,10 +7,6 @@ addSbtPlugin("io.get-coursier" % "sbt-coursier" % "1.0.0-RC10")
 
 addSbtPlugin("com.lucidchart" % "sbt-scalafmt-coursier" % "1.10")
 
-// scoverage provides code coverage metrics.
-
-addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.5.1")
-
 // WartRemover is an aggressive linter.
 
 addSbtPlugin("org.wartremover" % "sbt-wartremover" % "2.1.1")

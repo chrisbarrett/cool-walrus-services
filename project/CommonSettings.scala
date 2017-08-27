@@ -1,15 +1,12 @@
 package cool.walrus
 
-import sbt.Keys._
-import sbt._
-
 import com.lucidchart.sbt.scalafmt.ScalafmtCorePlugin.autoImport._
-import scoverage.ScoverageKeys._
+import sbt._, Keys._
 import wartremover._
 
 object CommonSettings {
   lazy val defaults =
-    basicSettings ++ dirSettings ++ promptSettings ++ coverageSettings ++ wartSettings ++ formatterSettings
+    basicSettings ++ dirSettings ++ promptSettings ++ wartSettings ++ formatterSettings
 
   // Define general settings.
 
@@ -62,23 +59,6 @@ object CommonSettings {
 
     unmanagedSourceDirectories in Compile += baseDirectory.value / "src_generated",
     unmanagedResourceDirectories in Compile += baseDirectory.value / "resources_generated"
-  )
-
-  // Add a `cover` command to run tests and generate coverage reports.
-
-  val cover = taskKey[Unit]("Run coverage")
-
-  lazy val coverageSettings = Seq(
-    coverageMinimum := 90,
-    coverageFailOnMinimum := true,
-    coverageExcludedPackages += "<empty>;^Main;cool.walrus.Main",
-    coverageEnabled := true,
-
-    cover := {
-      (coverageReport in Test) dependsOn
-      (test in Test) dependsOn
-      (clean in Test)
-    }.value
   )
 
   // Add wartremover as a compiler plugin so that warts are reported as compiler
